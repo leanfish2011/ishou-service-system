@@ -1,5 +1,6 @@
 package com.tim.ishou.system.service;
 
+import com.tim.ishou.system.po.SiteSub;
 import com.tim.ishou.system.vo.SiteSubAdd;
 import com.tim.ishou.system.vo.SiteSubSearchReq;
 import java.util.List;
@@ -20,5 +21,5 @@ public interface SiteSubService {
   /**
    * 待发布的订阅邮箱
    */
-  List<String> getSubEmail();
+  List<SiteSub> getSubEmail();
 }

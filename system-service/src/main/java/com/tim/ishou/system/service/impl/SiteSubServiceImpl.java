@@ -48,9 +48,8 @@ public class SiteSubServiceImpl implements SiteSubService {
   }
 
   @Override
-  public List<String> getSubEmail() {
-    List<SiteSub> siteSubList = siteSubMapper.selectByExample(null);
-    return siteSubList.stream().map(SiteSub::getEmail).collect(Collectors.toList());
+  public List<SiteSub> getSubEmail() {
+    return siteSubMapper.selectByExample(null);
   }
 
 }

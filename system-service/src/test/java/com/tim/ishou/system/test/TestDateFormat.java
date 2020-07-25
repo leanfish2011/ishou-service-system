@@ -2,6 +2,7 @@ package com.tim.ishou.system.test;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import org.junit.Test;
 
@@ -40,6 +41,16 @@ public class TestDateFormat {
     //使用format()方法格式化Date对象为字符串，返回字符串
     System.out.println(sdf1.format(date));
     System.out.println(sdf2.format(date));
+  }
+
+  @Test
+  public void testWeekOfYear() {
+    System.out.println(Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
+  }
+
+  @Test
+  public void testYear() {
+    System.out.println(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
   }
 
 }
