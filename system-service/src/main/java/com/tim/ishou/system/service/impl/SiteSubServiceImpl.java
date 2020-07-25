@@ -7,7 +7,9 @@ import com.tim.ishou.system.po.SiteSubExample.Criteria;
 import com.tim.ishou.system.service.SiteSubService;
 import com.tim.ishou.system.vo.SiteSubAdd;
 import com.tim.ishou.system.vo.SiteSubSearchReq;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,4 +46,11 @@ public class SiteSubServiceImpl implements SiteSubService {
   public Boolean delete(String id) {
     return siteSubMapper.deleteByPrimaryKey(id) > 0 ? true : false;
   }
+
+  @Override
+  public List<String> getSubEmail() {
+    List<SiteSub> siteSubList = siteSubMapper.selectByExample(null);
+    return siteSubList.stream().map(SiteSub::getEmail).collect(Collectors.toList());
+  }
+
 }
