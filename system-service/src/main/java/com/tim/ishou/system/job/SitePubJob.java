@@ -46,10 +46,10 @@ public class SitePubJob {
   private boolean pubSwitch;
 
   /**
-   * 首页网站发布
+   * 首页网站发布。每周日上午8点发送订阅邮件
    */
-  @Scheduled(cron = "${home.site.pub.cron:0 0 9 ? * 2}")
-  @Scheduled(fixedRate = 3000)
+  @Scheduled(cron = "${home.site.pub.cron:0 0 8 ? * 1}")
+  //@Scheduled(fixedRate = 3000)
   public void homeSitePub() {
     if (!pubSwitch) {
       log.warn("首页网站发布开关关闭！");
@@ -172,7 +172,7 @@ public class SitePubJob {
         + "       <td style=\"text-align:right;padding-right:50px\">"
         + "         <div>"
         + "           <span style=\"color:#0a8d40;font-size:14pt\">NO.</span>"
-        + "           <span style=\"color:#115fad;font-size:20pt\">"
+        + "           <span style=\"color:#115fad;font-size:18pt\">"
         + getNO() + "</span>"
         + "         </div>"
         + "         <div style=\"color:#6b6e75;font-size:14pt\">"
@@ -279,7 +279,7 @@ public class SitePubJob {
             + "         </tr>"
             + "        </tbody>"
             + "       </table></td>"
-            + "      <td><img src=\"http://106.53.116.69/static/img/weixinsite.90d7e20.jpg\" /></td>"
+            + "      <td><img height=\"184\" width=\"184\" src=\"http://106.53.116.69/static/img/weixinsite.90d7e20.jpg\" /></td>"
             + "     </tr>"
             + "    </tbody>"
             + "   </table>";
