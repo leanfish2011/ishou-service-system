@@ -27,9 +27,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SitePubJob {
 
-  @Value("${home.site.default.icon:http://106.53.116.69/static/ishou.ico}")
-  private String defaultIcon;
-
   @Value("${home.site.address:http://106.53.116.69}")
   private String siteAddress;
 
@@ -49,7 +46,7 @@ public class SitePubJob {
    * 首页网站发布。每周日上午8点发送订阅邮件
    */
   @Scheduled(cron = "${home.site.pub.cron:0 0 8 ? * 1}")
-  //@Scheduled(fixedRate = 3000)
+  //@Scheduled(fixedRate = 5000)
   public void homeSitePub() {
     if (!pubSwitch) {
       log.warn("首页网站发布开关关闭！");
@@ -162,7 +159,8 @@ public class SitePubJob {
         + "          <tbody>"
         + "            <tr height=\"60px\">"
         + "             <td><a href=\"" + siteAddress + "\" target=\"_blank\">"
-        + "                   <img height=\"50\" width=\"50\" src=\"" + defaultIcon + "\" /></a>"
+        + "                   <img height=\"50\" width=\"50\" src=\"" + siteAddress
+        + "/static/ishou.ico\" /></a>"
         + "                 <span style=\"font-size: 20pt;\">&nbsp;爱收藏</span><b style=\"font-size: 22pt;\">「每周经典网站」</b> "
         + "             </td>"
         + "            </tr>"
@@ -263,23 +261,30 @@ public class SitePubJob {
             + "          <td style=\"font-size: 14px;\">感谢您订阅「爱收藏-每周经典网站」<span style=\"color:red\">每周日</span>给订阅者发送每周网站精要邮件。 </td>"
             + "         </tr>"
             + "         <tr height=\"35px\" style=\"vertical-align: top;\">"
-            + "          <td style=\"font-size: 14px;\"><span>别人转发给你的邮件？</span><a href=\"http://106.53.116.69/\" target=\"_blank\" style=\"color: #0f957b; text-decoration: none;\">现在订阅您自己的爱收藏-每周经典网站邮件吧</a><span>。</span></td>"
+            + "          <td style=\"font-size: 14px;\"><span>别人转发给你的邮件？</span><a href=\""
+            + siteAddress
+            + "/\" target=\"_blank\" style=\"color: #0f957b; text-decoration: none;\">现在订阅您自己的爱收藏-每周经典网站邮件吧</a><span>。</span></td>"
             + "         </tr>"
             + "         <tr height=\"20px\">"
-            + "          <td style=\"font-size: 14px;\"><img src=\"https://static.geekbang.org/infoq/5a7d263b3ee4f.png\" style=\"margin-right: 10px; vertical-align: middle;\" /><span>爱收藏微博：</span><a href=\"http://106.53.116.69/\" target=\"_blank\" style=\"color: #0f957b; text-decoration: none;\">@爱收藏</a></td>"
+            + "          <td style=\"font-size: 14px;\"><img src=\"" + siteAddress
+            + "/static/img/weibo.png\" style=\"margin-right: 10px;\" height=\"20\" width=\"20\" /><span>爱收藏微博：</span><a href=\"http://weibo.com/u/1718711654\" target=\"_blank\" style=\"color: #0f957b; text-decoration: none;\">闯荡南北的鱼</a></td>"
             + "         </tr>"
             + "         <tr height=\"20px\">"
-            + "          <td style=\"font-size: 14px;\"><img src=\"https://static.geekbang.org/infoq/5a7d26cf64772.png\" style=\"margin-right: 10px; vertical-align: middle;\" /><span>爱收藏微信：leanfisher</span></td>"
+            + "          <td style=\"font-size: 14px;\"><img src=\"" + siteAddress
+            + "/static/img/weixin.png\" style=\"margin-right: 10px;\" height=\"20\" width=\"20\" /><span>爱收藏微信：leanfisher</span></td>"
             + "         </tr>"
             + "         <tr height=\"20px\">"
-            + "          <td style=\"font-size: 14px;\"><img src=\"https://static.geekbang.org/infoq/5a7d29d2cc386.png\" style=\"margin-right: 10px; vertical-align: middle;\" /><span>爱收藏邮箱：</span>leanfish2011@163.com</span></td>"
+            + "          <td style=\"font-size: 14px;\"><img src=\"" + siteAddress
+            + "/static/img/email.jpg\" style=\"margin-right: 10px;\" height=\"20\" width=\"20\"/><span>爱收藏邮箱：leanfish2011@163.com</span></td>"
             + "         </tr>"
             + "         <tr height=\"20px\">"
-            + "                    <td style=\"font-size: 14px;\"><img src=\"https://static.geekbang.org/infoq/5a7d29d2cc386.png\" style=\"margin-right: 10px; vertical-align: middle;\" /><span>作者博客：</span><a href=\"https://www.cnblogs.com/leanfish\" target=\"_blank\" style=\"color: #0f957b; text-decoration: none;\">博客园</a></td> "
+            + "                    <td style=\"font-size: 14px;\"><img src=\"" + siteAddress
+            + "/static/img/blog.jpg\" style=\"margin-right: 10px;\" height=\"20\" width=\"20\"/><span>博客：</span><a href=\"https://www.cnblogs.com/leanfish\" target=\"_blank\" style=\"color: #0f957b; text-decoration: none;\">瘦鱼 - 博客园</a></td> "
             + "         </tr>"
             + "        </tbody>"
             + "       </table></td>"
-            + "      <td><img height=\"184\" width=\"184\" src=\"http://106.53.116.69/static/img/weixinsite.90d7e20.jpg\" /></td>"
+            + "      <td><img height=\"184\" width=\"184\" src=\"" + siteAddress
+            + "/static/img/weixinsite.jpg\" /></td>"
             + "     </tr>"
             + "    </tbody>"
             + "   </table>";
@@ -294,7 +299,8 @@ public class SitePubJob {
   private String getUnSubInfo(String subId) {
     return "<div style=\"text-align:center\">"
         + "  <div style=\"border-top:1px solid #ddd;width: 600px;display:inline-block;padding:10px\">"
-        + "    <a style=\"display:inline-block;background:#ddd;border-radius:4px;padding: 3px 15px;color:#a6a6a6;text-decoration:none;font-size:12px\" href=\"http://106.53.116.69/\">点击这里取消订阅</a>\n"
+        + "    <a style=\"display:inline-block;background:#ddd;border-radius:4px;padding: 3px 15px;color:#a6a6a6;text-decoration:none;font-size:12px\" href=\""
+        + siteAddress + "/\">点击这里取消订阅</a>\n"
         + "  </div>\n"
         + "</div> ";
   }
