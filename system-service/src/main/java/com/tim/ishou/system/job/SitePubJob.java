@@ -247,6 +247,7 @@ public class SitePubJob {
    * 获取订阅信息
    */
   private String getSubTable() {
+    String subUrl = siteAddress + "/sub";
     return
         "<table width=\"700px\" bgcolor=\"#ffffff\" style=\"margin-top: auto; margin-left: auto; margin-right: auto;\" cellspacing=\"0\" cellpadding=\"0\">"
             + "    <tbody>"
@@ -262,8 +263,8 @@ public class SitePubJob {
             + "         </tr>"
             + "         <tr height=\"35px\" style=\"vertical-align: top;\">"
             + "          <td style=\"font-size: 14px;\"><span>别人转发给你的邮件？</span><a href=\""
-            + siteAddress
-            + "/\" target=\"_blank\" style=\"color: #0f957b; text-decoration: none;\">现在订阅您自己的爱收藏-每周经典网站邮件吧</a><span>。</span></td>"
+            + subUrl
+            + "\" target=\"_blank\" style=\"color: #0f957b; text-decoration: none;\">现在订阅您自己的爱收藏-每周经典网站邮件吧</a><span>。</span></td>"
             + "         </tr>"
             + "         <tr height=\"20px\">"
             + "          <td style=\"font-size: 14px;\"><img src=\"" + siteAddress
