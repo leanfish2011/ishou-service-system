@@ -297,10 +297,11 @@ public class SitePubJob {
    * @return 取消订阅信息
    */
   private String getUnSubInfo(String subId) {
+    String unSubUrl = siteAddress + "/unsub?subid=" + subId;
     return "<div style=\"text-align:center\">"
         + "  <div style=\"border-top:1px solid #ddd;width: 600px;display:inline-block;padding:10px\">"
         + "    <a style=\"display:inline-block;background:#ddd;border-radius:4px;padding: 3px 15px;color:#a6a6a6;text-decoration:none;font-size:12px\" href=\""
-        + siteAddress + "/\">点击这里取消订阅</a>\n"
+        + unSubUrl + "\">点击这里取消订阅</a>"
         + "  </div>\n"
         + "</div> ";
   }
