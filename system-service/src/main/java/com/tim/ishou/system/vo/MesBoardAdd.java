@@ -12,17 +12,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class MesBoardAdd {
 
   @NotBlank
-  private String userId;
-
-  @NotBlank
-  private String userName;
-
-  @NotBlank
-  private String userPhoto;
-
-  @NotBlank
   private String content;
 
-  @NotBlank
   private String parentId;
 }
