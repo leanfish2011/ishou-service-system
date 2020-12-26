@@ -4,8 +4,13 @@ import com.tim.auth.sdk.component.AccountInfo;
 import com.tim.auth.sdk.vo.LoginResp;
 import com.tim.ishou.system.dao.MesBoardMapper;
 import com.tim.ishou.system.po.MesBoard;
+import com.tim.ishou.system.po.MesBoardExample;
 import com.tim.ishou.system.service.MesBoardService;
 import com.tim.ishou.system.vo.MesBoardAdd;
+import com.tim.ishou.system.vo.MesBoardSearchData;
+import com.tim.ishou.system.vo.MesBoardSearchRes;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +43,27 @@ public class MesBoardServiceImpl implements MesBoardService {
     mesBoard.setUserPhoto("TODO");
 
     return mesBoardMapper.insertSelective(mesBoard) > 0 ? true : false;
+  }
+
+  @Override
+  public MesBoardSearchData list() {
+    MesBoardExample mesBoardExample = new MesBoardExample();
+    mesBoardExample.setOrderByClause("create_time desc");
+    List<MesBoard> mesBoardList = mesBoardMapper.selectByExample(mesBoardExample);
+
+    List<MesBoardSearchRes> mesBoardSearchResList = new ArrayList<>();
+    mesBoardList.stream().forEach(
+        mesBoard -> {
+          MesBoardSearchRes mesBoardSearchRes = new MesBoardSearchRes();
+          BeanUtils.copyProperties(mesBoard, mesBoardSearchRes);
+          mesBoardSearchResList.add(mesBoardSearchRes);
+        }
+    );
+
+    MesBoardSearchData mesBoardSearchData = new MesBoardSearchData();
+    mesBoardSearchData.setList(mesBoardSearchResList);
+    mesBoardSearchData.setTotal(mesBoardSearchResList.size());
+
+    return mesBoardSearchData;
   }
 }

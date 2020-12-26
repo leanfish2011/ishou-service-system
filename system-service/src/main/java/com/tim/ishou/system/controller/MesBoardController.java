@@ -2,10 +2,12 @@ package com.tim.ishou.system.controller;
 
 import com.tim.ishou.system.service.MesBoardService;
 import com.tim.ishou.system.vo.MesBoardAdd;
+import com.tim.ishou.system.vo.MesBoardSearchData;
 import com.tim.message.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,10 +27,16 @@ public class MesBoardController {
   private MesBoardService mesBoardService;
 
   @ApiOperation(value = "新增留言")
-  @RequestMapping(method = RequestMethod.POST)
+  @PostMapping
   public Message add(@RequestBody MesBoardAdd mesBoardAdd) {
     mesBoardService.add(mesBoardAdd);
     return Message.success();
+  }
+
+  @ApiOperation(value = "列出留言")
+  @RequestMapping(value = "/list", method = RequestMethod.GET)
+  public Message<MesBoardSearchData> list() {
+    return Message.success(mesBoardService.list());
   }
 
 }

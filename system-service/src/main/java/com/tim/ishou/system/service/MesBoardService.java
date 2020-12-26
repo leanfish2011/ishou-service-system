@@ -1,6 +1,7 @@
 package com.tim.ishou.system.service;
 
 import com.tim.ishou.system.vo.MesBoardAdd;
+import com.tim.ishou.system.vo.MesBoardSearchData;
 
 /**
  * @author：tim
@@ -10,4 +11,6 @@ import com.tim.ishou.system.vo.MesBoardAdd;
 public interface MesBoardService {
 
   Boolean add(MesBoardAdd mesBoardAdd);
+
+  MesBoardSearchData list();
 }
