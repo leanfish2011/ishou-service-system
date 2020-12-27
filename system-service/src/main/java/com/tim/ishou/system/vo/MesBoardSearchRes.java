@@ -23,5 +23,7 @@ public class MesBoardSearchRes {
 
   private String parentId;
 
+  private String parentUserName;
+
   private Date createTime;
 }

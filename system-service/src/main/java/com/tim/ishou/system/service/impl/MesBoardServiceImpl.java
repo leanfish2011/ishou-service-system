@@ -12,6 +12,7 @@ import com.tim.ishou.system.vo.MesBoardSearchRes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,12 @@ public class MesBoardServiceImpl implements MesBoardService {
         mesBoard -> {
           MesBoardSearchRes mesBoardSearchRes = new MesBoardSearchRes();
           BeanUtils.copyProperties(mesBoard, mesBoardSearchRes);
+
+          if (StringUtils.isNotEmpty(mesBoard.getParentId())) {
+            mesBoardList.stream().filter(mes -> mes.getId().equals(mesBoard.getParentId()))
+                .findFirst().ifPresent(m -> mesBoardSearchRes.setParentUserName(m.getUserName()));
+          }
+
           mesBoardSearchResList.add(mesBoardSearchRes);
         }
     );
