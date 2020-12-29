@@ -1,5 +1,6 @@
 package com.tim.ishou.system.controller;
 
+import com.tim.ishou.system.service.AnalyseService;
 import com.tim.ishou.system.service.MesBoardService;
 import com.tim.ishou.system.vo.MesBoardAdd;
 import com.tim.ishou.system.vo.MesBoardSearchData;
@@ -26,9 +27,17 @@ public class MesBoardController {
   @Autowired
   private MesBoardService mesBoardService;
 
+  @Autowired
+  private AnalyseService analyseService;
+
   @ApiOperation(value = "新增留言")
   @PostMapping
   public Message add(@RequestBody MesBoardAdd mesBoardAdd) {
+    boolean isTextLegal = analyseService.isTextLegal(mesBoardAdd.getContent());
+    if (!isTextLegal) {
+      return Message.error("内容不合法，存在违禁词或者恶意推广！");
+    }
+
     mesBoardService.add(mesBoardAdd);
     return Message.success();
   }
