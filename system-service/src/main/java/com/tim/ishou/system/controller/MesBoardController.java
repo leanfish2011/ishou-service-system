@@ -8,6 +8,7 @@ import com.tim.message.Message;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,4 +49,13 @@ public class MesBoardController {
     return Message.success(mesBoardService.list());
   }
 
+  @ApiOperation(value = "删除留言")
+  @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+  public Message delete(@PathVariable String id) {
+    Boolean isSuccess = mesBoardService.delete(id);
+    if (!isSuccess) {
+      return Message.error("删除失败！");
+    }
+    return Message.success();
+  }
 }

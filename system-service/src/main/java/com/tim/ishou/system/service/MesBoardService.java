@@ -13,4 +13,7 @@ public interface MesBoardService {
   Boolean add(MesBoardAdd mesBoardAdd);
 
   MesBoardSearchData list();
+
+  Boolean delete(String id);
+
 }

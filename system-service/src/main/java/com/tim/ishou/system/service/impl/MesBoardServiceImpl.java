@@ -73,4 +73,9 @@ public class MesBoardServiceImpl implements MesBoardService {
 
     return mesBoardSearchData;
   }
+
+  @Override
+  public Boolean delete(String id) {
+    return mesBoardMapper.deleteByPrimaryKey(id) == 1 ? true : false;
+  }
 }
