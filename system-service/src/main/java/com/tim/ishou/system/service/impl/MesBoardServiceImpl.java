@@ -40,8 +40,7 @@ public class MesBoardServiceImpl implements MesBoardService {
     LoginResp loginResp = accountInfo.getUserInfo().getLoginResp();
     mesBoard.setUserId(loginResp.getUserId());
     mesBoard.setUserName(loginResp.getName());
-    //TODO增加用户头像
-    mesBoard.setUserPhoto("TODO");
+    mesBoard.setUserPhoto(loginResp.getPhotourl());
 
     return mesBoardMapper.insertSelective(mesBoard) > 0 ? true : false;
   }
