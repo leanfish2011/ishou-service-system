@@ -5,6 +5,7 @@ import com.tim.ishou.system.service.AnalyseService;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,10 +20,22 @@ public class AnalyseServiceImpl implements AnalyseService {
   @Autowired
   private AipContentCensor aipContentCensor;
 
+  @Value("${analyze.api.switch:true}")
+  private boolean analyzeSwitch;
+
   @Override
   public Boolean isTextLegal(String content) {
+    if (!analyzeSwitch) {
+      return true;
+    }
+
     JSONObject response = aipContentCensor.textCensorUserDefined(content);
-    log.info("文本审核结果：{}", response.toString());
+    String result = response.toString();
+    log.info("文本审核结果：{}", result);
+    if (result.contains("error_msg")) {
+      //文本分析服务异常，都认为合规
+      return true;
+    }
 
     int conclusionType = response.getInt("conclusionType");
 
