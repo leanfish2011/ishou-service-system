@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name = "${ishou-service-system.name:ishou-service-system}", path = "/api/v1/system/analyse", configuration = FeignConfiguration.class)
+@FeignClient(name = "${ishou-service-system.name:ishou-service-system}", path = "/api/ishou/v2/system/analyse", configuration = FeignConfiguration.class)
 public interface AnalyseFeignClient {
 
   @RequestMapping(value = "/text", method = RequestMethod.POST)
