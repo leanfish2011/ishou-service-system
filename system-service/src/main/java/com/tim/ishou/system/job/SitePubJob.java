@@ -8,6 +8,7 @@ import com.tim.ishou.system.po.SiteSub;
 import com.tim.ishou.system.service.SiteSubService;
 import com.tim.message.MainCode;
 import com.tim.message.Message;
+import com.tim.system.sdk.po.MailReq;
 import com.tim.util.DateFormateUtil;
 import java.util.Calendar;
 import java.util.Date;
@@ -78,7 +79,9 @@ public class SitePubJob {
     siteSubList.stream().parallel().forEach(siteSub -> {
           String unSubInfo = getUnSubInfo(siteSub.getId());
           String content = getContent(fullStyle, siteTable, subTable, unSubInfo);
-          mailHandle.sendMimeMessge(siteSub.getEmail(), subject, content);
+
+          MailReq mailReq = new MailReq(siteSub.getEmail(), subject, content);
+          mailHandle.sendMimeMessge(mailReq);
         }
     );
 

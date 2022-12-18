@@ -24,6 +24,7 @@
     <dev-core.version>2.0-SNAPSHOT</dev-core.version>
     <auth-sdk.version>2.0-SNAPSHOT</auth-sdk.version>
     <site-sdk.version>2.0-SNAPSHOT</site-sdk.version>
+    <system-sdk.version>2.0-SNAPSHOT</system-sdk.version>
     <baidu.aip.version>4.15.1</baidu.aip.version>
   </properties>
 
@@ -46,6 +47,12 @@
         <groupId>com.tim</groupId>
         <artifactId>site-sdk</artifactId>
         <version>${site-sdk.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.tim</groupId>
+        <artifactId>system-sdk</artifactId>
+        <version>${system-sdk.version}</version>
       </dependency>
 
       <dependency>
