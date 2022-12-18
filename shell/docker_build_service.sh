@@ -31,6 +31,10 @@ function build_image()
     latest_commit_id=$(git rev-parse --short HEAD)
     echo "当前分支最后commitId："$latest_commit_id
 
+    # 获取当前分支最后提交时间
+    latest_commit_time=$(git show --pretty=format:"%ci %cr" | head -1)
+    echo "当前分支最后提交时间："$latest_commit_time
+
     # 清理target
     cd $project_path"/"$2
     rm -rf target
