@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 /**
  * @author：tim
@@ -191,9 +192,8 @@ public class SitePubJob {
    * 获取期刊号，例如：2020-30
    */
   private String getNO() {
-    return String.valueOf(Calendar.getInstance().get(Calendar.YEAR)) + "-" + String
-        .valueOf(Calendar.getInstance()
-            .get(Calendar.WEEK_OF_YEAR));
+    return Calendar.getInstance().get(Calendar.YEAR) + "-" + Calendar.getInstance()
+        .get(Calendar.WEEK_OF_YEAR);
   }
 
   /**
@@ -225,12 +225,14 @@ public class SitePubJob {
           + "             </tr>"
           + "             <tr>"
           + "              <td style=\"padding-bottom:15px\"> <span style=\"display: inline-block;min-width: 10px;padding: 3px 15px;font-size: 11px;line-height: 1;vertical-align: baseline;white-space: nowrap;text-align: center;background-color: #eeeeee;border-radius: 10px; color: #666666;\">");
-      stringBuilderContent.append(siteHomeSearchResp.getTag());
+      stringBuilderContent.append(
+          StringUtils.isEmpty(siteHomeSearchResp.getTag()) ? "" : siteHomeSearchResp.getTag());
       stringBuilderContent.append("</span> </td>"
           + "             </tr>"
           + "             <tr>"
           + "              <td style=\"color: #666666; font-size: 14px; line-height: 1.6em;\">");
-      stringBuilderContent.append(siteHomeSearchResp.getRemark());
+      stringBuilderContent.append(StringUtils.isEmpty(siteHomeSearchResp.getRemark()) ? ""
+          : siteHomeSearchResp.getRemark());
       stringBuilderContent.append("</td>"
           + "             </tr>"
           + "            </tbody>"
