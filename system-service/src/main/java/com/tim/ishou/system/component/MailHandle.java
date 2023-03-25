@@ -1,5 +1,6 @@
 package com.tim.ishou.system.component;
 
+import com.tim.system.sdk.po.MailReq;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -24,21 +25,21 @@ public class MailHandle {
   @Value("${spring.mail.username:leanfish2011@163.com}")
   private String from;
 
-  public void sendMimeMessge(String to, String subject, String content) {
+  public void sendMimeMessge(MailReq mailReq) {
     MimeMessage message = mailSender.createMimeMessage();
     try {
       //true表示需要创建一个multipart message
       MimeMessageHelper helper = new MimeMessageHelper(message, true);
       helper.setFrom(from);
-      helper.setTo(to);
-      helper.setSubject(subject);
-      helper.setText(content, true);
+      helper.setTo(mailReq.getTo());
+      helper.setSubject(mailReq.getSubject());
+      helper.setText(mailReq.getContent(), true);
     } catch (MessagingException e) {
       log.error("发送邮件失败。", e);
       return;
     }
 
     mailSender.send(message);
-    log.info("邮件发送成功，TO " + to);
+    log.info("邮件发送成功，TO " + mailReq.getTo());
   }
 }
